@@ -1,9 +1,7 @@
 let cart = [];
 let totalBase = 0;
 
-// ==========================================
-// 1. SISTEMA DE LOJA ABERTA / FECHADA
-// ==========================================
+// 1. Verificador de Horário da Loja
 function verificarHorarioLoja() {
     const agora = new Date();
     const hora = agora.getHours();
@@ -11,8 +9,7 @@ function verificarHorarioLoja() {
     const horaDecimal = hora + minutos / 60;
 
     const statusDiv = document.getElementById('status-loja');
-    
-    // Configurado para abrir das 17:30 até 23:59 (Adapte se precisar)
+    // Aberto das 17:30 às 23:59 (Modifique se precisar)
     const aberto = horaDecimal >= 17.5 && horaDecimal <= 23.99;
 
     if (aberto) {
@@ -26,14 +23,39 @@ function verificarHorarioLoja() {
     }
 }
 
-// Chamar a função assim que o site carregar
+// 2. Renderizar Cartão Fidelidade (Mini-jogo visual)
+function renderizarFidelidade() {
+    const grid = document.getElementById('fidelidade-grid');
+    const texto = document.getElementById('fidelidade-texto');
+    
+    let dadosFidelidade = JSON.parse(localStorage.getItem('ketsuen_fidelidade')) || { contador: 0, ultimaData: "" };
+    let contador = dadosFidelidade.contador;
+
+    let html = '';
+    for (let i = 1; i <= 10; i++) {
+        if (i <= contador) {
+            html += `<div class="fidelidade-slot preenchido">🍣</div>`;
+        } else {
+            html += `<div class="fidelidade-slot">⚪</div>`;
+        }
+    }
+    grid.innerHTML = html;
+    
+    if (contador >= 10) {
+        texto.innerHTML = "<b>🎉 Parabéns! Você completou 10 pedidos!</b> O próximo pedido terá brindes!";
+        texto.style.color = "#2ecc71";
+    } else {
+        texto.innerHTML = `Faltam apenas <b>${10 - contador}</b> pedidos (em dias diferentes) para o seu brinde!`;
+        texto.style.color = "#fff";
+    }
+}
+
 window.onload = function() {
     verificarHorarioLoja();
+    renderizarFidelidade();
 };
 
-// ==========================================
-// 2. NAVEGAÇÃO E MODAL DE INGREDIENTES
-// ==========================================
+// Navegação e Modais
 function abrirPagina(id, event) {
     document.querySelectorAll('.menu-page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -53,9 +75,7 @@ function fecharModal(event) {
     }
 }
 
-// ==========================================
-// 3. LÓGICA DO CARRINHO
-// ==========================================
+// Carrinho
 function add(n, p) {
     cart.push({ n, p });
     totalBase += p;
@@ -90,11 +110,8 @@ function gerenciarCamposExtras() {
     document.getElementById('div-troco').style.display = (pag === "Dinheiro") ? "block" : "none";
 }
 
-// ==========================================
-// 4. ENVIO PARA WHATSAPP & FIDELIDADE (1 Pedido p/ Dia)
-// ==========================================
+// Envio e Reset Inteligente
 function enviar() {
-    // Bloqueia se estiver fechado
     if (!verificarHorarioLoja()) {
         return alert("Desculpe, a loja está fechada no momento! Não é possível enviar pedidos.");
     }
@@ -108,22 +125,14 @@ function enviar() {
 
     if (!nome || !end || !tel) return alert("Por favor, preencha seus dados de entrega!");
 
-    // --- LÓGICA DE FIDELIDADE (1 DIA = 1 PONTO) ---
-    // Resgata os dados antigos ou cria novos
+    // Fidelidade (1 por dia)
     let dadosFidelidade = JSON.parse(localStorage.getItem('ketsuen_fidelidade')) || { contador: 0, ultimaData: "" };
-    
-    // Pega a data atual (Ex: "2023-10-31")
     const hoje = new Date().toISOString().split('T')[0];
 
-    // Se a data de hoje for diferente da última data salva, ele ganha +1 no contador de dias
     if (dadosFidelidade.ultimaData !== hoje) {
         dadosFidelidade.contador += 1;
         dadosFidelidade.ultimaData = hoje;
     }
-
-    // Salva os dados atualizados no navegador
-    localStorage.setItem('ketsuen_fidelidade', JSON.stringify(dadosFidelidade));
-    // ---------------------------------------------
 
     let msg = `*🍱 NOVO PEDIDO - KETSUEN VP*\n`;
     msg += `────────────────────\n`;
@@ -144,24 +153,37 @@ function enviar() {
 
     msg += `\n*💰 TOTAL A PAGAR: R$ ${totalBase.toFixed(2)}*\n`;
     
-    // Regra do 10º Dia (Se atingiu 10 ou mais)
     if (dadosFidelidade.contador >= 10) {
         msg += `\n🎉 *PARABÉNS! ESTE É SEU 10º PEDIDO DE DIAS DIFERENTES!*\n`;
-        msg += `🎁 *Brindes a receber:*\n`;
+        msg += `🎁 *Brindes resgatados:*\n`;
         msg += `- Entrega Grátis\n`;
         msg += `- 1x Rolinho Primavera (Cortesia)\n`;
         msg += `- 1x Kani de Queijo (Cortesia)\n`;
         
-        // Zera o contador para o cliente começar um novo ciclo na próxima vez
-        dadosFidelidade.contador = 0;
-        localStorage.setItem('ketsuen_fidelidade', JSON.stringify(dadosFidelidade));
+        dadosFidelidade.contador = 0; // Reseta o ciclo do carimbo
     } else {
-        msg += `\n🌟 *Fidelidade:* Este é o seu pedido do dia ${dadosFidelidade.contador}/10. (Ao completar 10 você ganha Brindes!)\n`;
+        msg += `\n🌟 *Fidelidade:* Pedido do dia ${dadosFidelidade.contador}/10.\n`;
     }
     
+    localStorage.setItem('ketsuen_fidelidade', JSON.stringify(dadosFidelidade));
     msg += `────────────────────`;
 
-    // INSIRA SEU NÚMERO DE WHATSAPP AQUI (Somente números com código do país e DDD)
     const fone = "558183418003"; 
     window.open(`https://wa.me/${fone}?text=${encodeURIComponent(msg)}`);
+
+    // ==========================================
+    // RESET TOTAL PÓS-PEDIDO
+    // ==========================================
+    cart = [];
+    totalBase = 0;
+    renderCart();
+    
+    document.getElementById('nome-cli').value = '';
+    document.getElementById('end-cli').value = '';
+    document.getElementById('tel-cli').value = '';
+    document.getElementById('troco-cli').value = '';
+    document.getElementById('pagamento').value = 'Pix';
+    gerenciarCamposExtras();
+    
+    renderizarFidelidade(); // Atualiza os carimbos visuais
 }
