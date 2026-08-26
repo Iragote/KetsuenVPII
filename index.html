@@ -22,7 +22,7 @@
         <button class="tab-btn active" onclick="abrirPagina('natural', event)">Sushi Natural</button>
         <button class="tab-btn" onclick="abrirPagina('frito', event)">Sushi Frito</button>
         <button class="tab-btn" onclick="abrirPagina('temaki', event)">Temakis</button>
-        <button class="tab-btn" onclick="abrirPagina('sunomono', event)">sunomono</button>
+        <button class="tab-btn" onclick="abrirPagina('sunomono', event)">Sunomono</button>
         <button class="tab-btn" onclick="abrirPagina('rolinho primavera', event)">Rolinho Primavera</button>
         <button class="tab-btn" onclick="abrirPagina('yaki', event)">Yakissoba</button>
         <button class="tab-btn" onclick="abrirPagina('sushi burguer', event)">Sushi Burguer</button>
@@ -77,6 +77,28 @@
         <div class="item">
             <span>Niguiri Salmão <button class="info-btn" onclick="verIngredientes('Niguiri Salmão', 'Bolinho de arroz e fatia de Salmão.')">ℹ️</button></span>
             <div><span class="preco">R$ 25,00</span><button class="add-btn" onclick="add('Niguiri Salmão', 25)">+</button></div>
+        </div>
+
+        <!-- ONIGIRI ADICIONADO -->
+        <div class="header-combo">
+            <h3 style="margin: 0;">Onigiri</h3>
+        </div>
+        <div class="item">
+            <span>Onigiri Salmão <button class="info-btn" onclick="verIngredientes('Onigiri Salmão', 'Bolinho de arroz recheado com salmão e cream cheese, envolto em alga.')">ℹ️</button></span>
+            <div><span class="preco">R$ 15,00</span><button class="add-btn" onclick="add('Onigiri Salmão', 15)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Onigiri Camarão <button class="info-btn" onclick="verIngredientes('Onigiri Camarão', 'Bolinho de arroz recheado com camarão e cream cheese, envolto em alga.')">ℹ️</button></span>
+            <div><span class="preco">R$ 15,00</span><button class="add-btn" onclick="add('Onigiri Camarão', 15)">+</button></div>
+        </div>
+
+        <!-- SASHIMI ADICIONADO -->
+        <div class="header-combo">
+            <h3 style="margin: 0;">Sashimi (10 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Sashimi de Salmão <button class="info-btn" onclick="verIngredientes('Sashimi de Salmão', 'Fatias finas de salmão fresco.')">ℹ️</button></span>
+            <div><span class="preco">R$ 35,00</span><button class="add-btn" onclick="add('Sashimi de Salmão', 35)">+</button></div>
         </div>
 
         <div class="header-combo">
@@ -189,12 +211,15 @@
         </div>
     </div>
 
-    <!-- TEMAKIS -->
+    <!-- TEMAKIS (COM SUBDIVISÕES: NATURAL E FRITO) -->
     <div id="temaki" class="menu-page">
         <div class="header-combo">
             <img src="img/tema.webp" alt="Temaki">
-            <h3 style="margin: 0;">Temakis (Cone)</h3>
+            <h3 style="margin: 0;">Temakis</h3>
         </div>
+
+        <!-- Subdivisão: Temaki Natural -->
+        <h4 style="color: #e60000; margin-top: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">Temaki Natural (Cone)</h4>
         <div class="item">
             <span>Temaki Salmão <button class="info-btn" onclick="verIngredientes('Temaki Salmão', 'Cone de alga, arroz, salmão fresco e cream cheese.')">ℹ️</button></span>
             <div><span class="preco">R$ 27,99</span><button class="add-btn" onclick="add('Temaki Salmão', 27.99)">+</button></div>
@@ -210,6 +235,50 @@
         <div class="item">
             <span>Temaki Misto <button class="info-btn" onclick="verIngredientes('Temaki Misto', 'Cone de alga, arroz, mix de recheios e cream cheese.')">ℹ️</button></span>
             <div><span class="preco">R$ 19,99</span><button class="add-btn" onclick="add('Temaki Misto', 19.99)">+</button></div>
+        </div>
+
+        <!-- Subdivisão: Temaki Frito (Com Mini Temaki incluso) -->
+        <h4 style="color: #e60000; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">Temaki Frito / Empanado</h4>
+        <div class="item">
+            <span>Temaki Frito Salmão <button class="info-btn" onclick="verIngredientes('Temaki Frito Salmão', 'Cone empanado e frito com recheio de salmão e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 29,99</span><button class="add-btn" onclick="add('Temaki Frito Salmão', 29.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Temaki Frito Camarão <button class="info-btn" onclick="verIngredientes('Temaki Frito Camarão', 'Cone empanado e frito com recheio de camarão e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 27,99</span><button class="add-btn" onclick="add('Temaki Frito Camarão', 27.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Temaki Frito Misto <button class="info-btn" onclick="verIngredientes('Temaki Frito Misto', 'Cone empanado e frito com mix de recheios e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 22,99</span><button class="add-btn" onclick="add('Temaki Frito Misto', 22.99)">+</button></div>
+        </div>
+
+        <!-- Mini Temaki Frito (5 unidades por 50) -->
+        <div class="item" style="margin-top: 15px; background: #1a1a1a; padding: 10px; border-radius: 5px; border-left: 3px solid #e60000;">
+            <span>Mini Temaki Frito (5 unidades) <button class="info-btn" onclick="verIngredientes('Mini Temaki Frito', 'Kit com 5 mini temakis empanados e fritos.')">ℹ️</button></span>
+            <div><span class="preco">R$ 50,00</span><button class="add-btn" onclick="add('Mini Temaki Frito (5 un)', 50)">+</button></div>
+        </div>
+    </div>
+
+    <!-- ROLINHO PRIMAVERA (Com Subdivisão / Opções) -->
+    <div id="rolinho primavera" class="menu-page">
+        <div class="header-combo">
+            <h3 style="margin: 0;">Rolinho Primavera</h3>
+        </div>
+        
+        <h4 style="color: #e60000; margin-top: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">Tradicional</h4>
+        <div class="item">
+            <span>Rolinho Primavera Queijo (Unidade) <button class="info-btn" onclick="verIngredientes('Rolinho Queijo', 'Massa crocante recheada com queijo derretido.')">ℹ️</button></span>
+            <div><span class="preco">R$ 8,00</span><button class="add-btn" onclick="add('Rolinho Primavera Queijo', 8)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Rolinho Primavera Carne com Queijo (Unidade) <button class="info-btn" onclick="verIngredientes('Rolinho Carne com Queijo', 'Massa crocante recheada com carne moída temperada e queijo.')">ℹ️</button></span>
+            <div><span class="preco">R$ 9,00</span><button class="add-btn" onclick="add('Rolinho Primavera Carne com Queijo', 9)">+</button></div>
+        </div>
+
+        <h4 style="color: #e60000; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">Romeu e Julieta (Doce)</h4>
+        <div class="item">
+            <span>Rolinho Romeu e Julieta (Unidade) <button class="info-btn" onclick="verIngredientes('Rolinho Romeu e Julieta', 'Massa crocante recheada com goiabada e cream cheese / queijo.')">ℹ️</button></span>
+            <div><span class="preco">R$ 8,50</span><button class="add-btn" onclick="add('Rolinho Romeu e Julieta', 8.50)">+</button></div>
         </div>
     </div>
 
@@ -233,23 +302,23 @@
         </div>
     </div>
     
-    <!-- YAKISSOBA -->
+    <!-- SUNOMONO -->
     <div id="sunomono" class="menu-page">
         <div class="header-combo">
             <img src="img/yaki.jpg" alt="Sunomono">
             <h3 style="margin: 0;">Sunomono</h3>
         </div>
         <div class="item">
-            <span>Sunomono P <button class="info-btn" onclick="verIngredientes('Yakissoba', 'Macarrão oriental, legumes, carnes e molho shoyu.')">ℹ️</button></span>
-            <div><span class="preco">R$ 14,99</span><button class="add-btn" onclick="add('Yakissoba P', 14.99)">+</button></div>
+            <span>Sunomono P <button class="info-btn" onclick="verIngredientes('Sunomono', 'Conservas de pepino japonês com gergelim.')">ℹ️</button></span>
+            <div><span class="preco">R$ 14,99</span><button class="add-btn" onclick="add('Sunomono P', 14.99)">+</button></div>
         </div>
         <div class="item">
-            <span>Sunomono M <button class="info-btn" onclick="verIngredientes('Yakissoba', 'Macarrão oriental, legumes, carnes e molho shoyu.')">ℹ️</button></span>
-            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Yakissoba M', 24.99)">+</button></div>
+            <span>Sunomono M <button class="info-btn" onclick="verIngredientes('Sunomono', 'Conservas de pepino japonês com fatias de kani e gergelim.')">ℹ️</button></span>
+            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Sunomono M', 24.99)">+</button></div>
         </div>
         <div class="item">
             <span>Sunomono G <button class="info-btn" onclick="verIngredientes('Sunomono', 'Conservas de pepino japonês com fatias de kani, salmão, gergelim e molho agridoce.')">ℹ️</button></span>
-            <div><span class="preco">R$ 34,99</span><button class="add-btn" onclick="add('Yakissoba G', 34.99)">+</button></div>
+            <div><span class="preco">R$ 34,99</span><button class="add-btn" onclick="add('Sunomono G', 34.99)">+</button></div>
         </div>
     </div>
     
