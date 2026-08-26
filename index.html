@@ -22,7 +22,11 @@
         <button class="tab-btn active" onclick="abrirPagina('natural', event)">Sushi Natural</button>
         <button class="tab-btn" onclick="abrirPagina('frito', event)">Sushi Frito</button>
         <button class="tab-btn" onclick="abrirPagina('temaki', event)">Temakis</button>
-        <button class="tab-btn" onclick="abrirPagina('yaki', event)">Yakissoba</button>  
+        <button class="tab-btn" onclick="abrirPagina('sunomono', event)">sunomono</button>
+        <button class="tab-btn" onclick="abrirPagina('rolinho primavera', event)">Rolinho Primavera</button>
+        <button class="tab-btn" onclick="abrirPagina('yaki', event)">Yakissoba</button>
+        <button class="tab-btn" onclick="abrirPagina('sushi burguer', event)">Sushi Burguer</button>
+        <button class="tab-btn" onclick="abrirPagina('sushi hot dog', event)">Sushi Hot Dog</button>
         <button class="tab-btn" onclick="abrirPagina('combos', event)">Combos</button>
     </div>
 
@@ -228,7 +232,27 @@
             <div><span class="preco">R$ 34,99</span><button class="add-btn" onclick="add('Yakissoba G', 34.99)">+</button></div>
         </div>
     </div>
-
+    
+    <!-- YAKISSOBA -->
+    <div id="sunomono" class="menu-page">
+        <div class="header-combo">
+            <img src="img/yaki.jpg" alt="Sunomono">
+            <h3 style="margin: 0;">Sunomono</h3>
+        </div>
+        <div class="item">
+            <span>Sunomono P <button class="info-btn" onclick="verIngredientes('Yakissoba', 'Macarrão oriental, legumes, carnes e molho shoyu.')">ℹ️</button></span>
+            <div><span class="preco">R$ 14,99</span><button class="add-btn" onclick="add('Yakissoba P', 14.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sunomono M <button class="info-btn" onclick="verIngredientes('Yakissoba', 'Macarrão oriental, legumes, carnes e molho shoyu.')">ℹ️</button></span>
+            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Yakissoba M', 24.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sunomono G <button class="info-btn" onclick="verIngredientes('Sunomono', 'Conservas de pepino japonês com fatias de kani, salmão, gergelim e molho agridoce.')">ℹ️</button></span>
+            <div><span class="preco">R$ 34,99</span><button class="add-btn" onclick="add('Yakissoba G', 34.99)">+</button></div>
+        </div>
+    </div>
+    
     <!-- CARTÃO FIDELIDADE (MINI-JOGO) -->
     <div class="fidelidade-container">
         <h3>Seu Cartão Fidelidade 🍣</h3>
