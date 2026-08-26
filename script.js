@@ -1,7 +1,7 @@
 let cart = [];
 let totalBase = 0;
 
-// 1. Verificador de Horário da Loja
+// 1. Verificador de Horário da Loja (Aberto das 17:30 às 21:00)
 function verificarHorarioLoja() {
     const agora = new Date();
     const hora = agora.getHours();
@@ -9,8 +9,9 @@ function verificarHorarioLoja() {
     const horaDecimal = hora + minutos / 60;
 
     const statusDiv = document.getElementById('status-loja');
-    // Aberto das 17:30 às 23:59 (Modifique se precisar)
-    const aberto = horaDecimal >= 17.5 && horaDecimal <= 23.99;
+    
+    // Ajustado para fechar pontualmente às 21:00
+    const aberto = horaDecimal >= 17.5 && horaDecimal <= 21.0;
 
     if (aberto) {
         statusDiv.className = "status-loja aberto";
@@ -18,7 +19,7 @@ function verificarHorarioLoja() {
         return true;
     } else {
         statusDiv.className = "status-loja fechado";
-        statusDiv.innerText = "🔴 Loja Fechada (Abrimos às 17:30)";
+        statusDiv.innerText = "🔴 Loja Fechada (Horário: 17:30 às 21:00)";
         return false;
     }
 }
