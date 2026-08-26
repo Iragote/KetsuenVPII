@@ -1,210 +1,167 @@
-body { 
-    font-family: 'Montserrat', sans-serif; 
-    background-color: #000; 
-    color: #ffcc00; 
-    margin: 0; 
-    padding: 10px; 
+let cart = [];
+let totalBase = 0;
+
+// ==========================================
+// 1. SISTEMA DE LOJA ABERTA / FECHADA
+// ==========================================
+function verificarHorarioLoja() {
+    const agora = new Date();
+    const hora = agora.getHours();
+    const minutos = agora.getMinutes();
+    const horaDecimal = hora + minutos / 60;
+
+    const statusDiv = document.getElementById('status-loja');
+    
+    // Configurado para abrir das 17:30 até 23:59 (Adapte se precisar)
+    const aberto = horaDecimal >= 17.5 && horaDecimal <= 23.99;
+
+    if (aberto) {
+        statusDiv.className = "status-loja aberto";
+        statusDiv.innerText = "🟢 Estamos Abertos para Pedidos!";
+        return true;
+    } else {
+        statusDiv.className = "status-loja fechado";
+        statusDiv.innerText = "🔴 Loja Fechada (Abrimos às 17:30)";
+        return false;
+    }
 }
 
-.container { 
-    max-width: 600px; 
-    margin: auto; 
-    border: 2px solid #e60000; 
-    border-radius: 15px; 
-    padding: 15px; 
-    background: #0a0a0a; 
+// Chamar a função assim que o site carregar
+window.onload = function() {
+    verificarHorarioLoja();
+};
+
+// ==========================================
+// 2. NAVEGAÇÃO E MODAL DE INGREDIENTES
+// ==========================================
+function abrirPagina(id, event) {
+    document.querySelectorAll('.menu-page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if(event) event.currentTarget.classList.add('active');
 }
 
-h1, h3, .tab-btn, .preco, #btn-enviar { 
-    font-family: 'Oswald', sans-serif; 
-    text-transform: uppercase; 
+function verIngredientes(nomePrato, desc) {
+    document.getElementById('modal-titulo').innerText = nomePrato;
+    document.getElementById('modal-texto').innerText = desc;
+    document.getElementById('modal-ingredientes').style.display = 'flex';
 }
 
-h1 { 
-    color: #e60000; 
-    text-align: center; 
-    margin-bottom: 5px; 
-    letter-spacing: 1px; 
+function fecharModal(event) {
+    if (!event || event.target.id === 'modal-ingredientes') {
+        document.getElementById('modal-ingredientes').style.display = 'none';
+    }
 }
 
-.subtitle { 
-    text-align: center; 
-    color: #fff; 
-    font-size: 0.9rem; 
-    margin-bottom: 20px; 
-    font-weight: bold; 
+// ==========================================
+// 3. LÓGICA DO CARRINHO
+// ==========================================
+function add(n, p) {
+    cart.push({ n, p });
+    totalBase += p;
+    renderCart();
 }
 
-/* Status da Loja */
-.status-loja {
-    text-align: center;
-    font-size: 0.8rem;
-    font-weight: bold;
-    padding: 6px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-.status-loja.aberto { background: #1b4332; color: #74c69d; border: 1px solid #2d6a4f; }
-.status-loja.fechado { background: #431b1b; color: #ff8a8a; border: 1px solid #661d1d; }
-
-.tabs { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 5px; 
-    justify-content: center; 
-    margin-bottom: 20px; 
-    position: sticky; 
-    top: 0; 
-    background: #0a0a0a; 
-    padding: 10px 0; 
-    z-index: 10; 
+function remove(index) {
+    totalBase -= cart[index].p;
+    cart.splice(index, 1);
+    renderCart();
 }
 
-.tab-btn { 
-    background: #222; 
-    color: #fff; 
-    border: 1px solid #e60000; 
-    padding: 10px; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    flex: 1 1 30%; 
-    font-weight: bold; 
-    font-size: 0.75rem; 
+function renderCart() {
+    const lista = document.getElementById('lista-carrinho');
+    document.getElementById('total-val').innerText = totalBase.toFixed(2).replace('.', ',');
+    
+    if (cart.length === 0) {
+        lista.innerHTML = "Carrinho vazio";
+        return;
+    }
+
+    lista.innerHTML = cart.map((item, index) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; background: #1a1a1a; padding: 8px 10px; border-radius: 5px; border-left: 3px solid #e60000;">
+            <span style="font-size: 0.85rem;">• ${item.n} (R$ ${item.p.toFixed(2)})</span>
+            <button onclick="remove(${index})" style="background: #e60000; color: white; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">X</button>
+        </div>
+    `).join('');
 }
 
-.tab-btn.active { 
-    background: #e60000; 
-    color: #fff; 
+function gerenciarCamposExtras() {
+    const pag = document.getElementById('pagamento').value;
+    document.getElementById('div-troco').style.display = (pag === "Dinheiro") ? "block" : "none";
 }
 
-.menu-page { 
-    display: none; 
-}
+// ==========================================
+// 4. ENVIO PARA WHATSAPP & FIDELIDADE (1 Pedido p/ Dia)
+// ==========================================
+function enviar() {
+    // Bloqueia se estiver fechado
+    if (!verificarHorarioLoja()) {
+        return alert("Desculpe, a loja está fechada no momento! Não é possível enviar pedidos.");
+    }
+    
+    if (cart.length === 0) return alert("Adicione algo ao carrinho primeiro!");
+    
+    const nome = document.getElementById('nome-cli').value;
+    const end = document.getElementById('end-cli').value;
+    const tel = document.getElementById('tel-cli').value;
+    const pag = document.getElementById('pagamento').value;
 
-.menu-page.active { 
-    display: block; 
-}
+    if (!nome || !end || !tel) return alert("Por favor, preencha seus dados de entrega!");
 
-.item { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    border-bottom: 1px solid #222; 
-    padding: 12px 0; 
-}
-.item span {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    font-size: 0.9rem;
-}
-.item div {
-    display: flex;
-    align-items: center;
-}
+    // --- LÓGICA DE FIDELIDADE (1 DIA = 1 PONTO) ---
+    // Resgata os dados antigos ou cria novos
+    let dadosFidelidade = JSON.parse(localStorage.getItem('ketsuen_fidelidade')) || { contador: 0, ultimaData: "" };
+    
+    // Pega a data atual (Ex: "2023-10-31")
+    const hoje = new Date().toISOString().split('T')[0];
 
-.preco { 
-    color: #ffcc00; 
-    font-weight: bold; 
-    margin-right: 10px; 
-    font-size: 0.9rem; 
-}
+    // Se a data de hoje for diferente da última data salva, ele ganha +1 no contador de dias
+    if (dadosFidelidade.ultimaData !== hoje) {
+        dadosFidelidade.contador += 1;
+        dadosFidelidade.ultimaData = hoje;
+    }
 
-button.add-btn { 
-    background: #e60000; 
-    color: white; 
-    border: none; 
-    padding: 6px 14px; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    font-size: 1rem;
-}
+    // Salva os dados atualizados no navegador
+    localStorage.setItem('ketsuen_fidelidade', JSON.stringify(dadosFidelidade));
+    // ---------------------------------------------
 
-.header-combo { 
-    display: flex; 
-    align-items: center; 
-    gap: 15px; 
-    margin-top: 20px; 
-    border-bottom: 2px solid #e60000; 
-    padding-bottom: 5px; 
-}
+    let msg = `*🍱 NOVO PEDIDO - KETSUEN VP*\n`;
+    msg += `────────────────────\n`;
+    msg += `*👤 CLIENTE:* ${nome}\n`;
+    msg += `*📍 ENDEREÇO:* ${end}\n`;
+    msg += `*📞 CONTATO:* ${tel}\n`;
+    msg += `────────────────────\n\n`;
 
-.header-combo img { 
-    width: 80px; 
-    height: 80px; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    border: 1px solid #ffcc00; 
-}
+    msg += `*📝 ITENS DO PEDIDO:*\n`;
+    msg += cart.map(i => `• ${i.n} (R$ ${i.p.toFixed(2)})`).join('\n');
+    msg += `\n\n────────────────────\n`;
+    msg += `*💳 FORMA DE PAGAMENTO:* ${pag}\n`;
 
-.carrinho-fixo { 
-    background: #111; 
-    padding: 15px; 
-    border: 2px solid #e60000; 
-    border-radius: 10px; 
-    margin-top: 30px; 
-}
+    if (pag === "Dinheiro") {
+        const troco = document.getElementById('troco-cli').value;
+        if(troco) msg += `*💵 TROCO PARA:* R$ ${troco}\n`;
+    }
 
-.campo-cliente { 
-    width: 100%; 
-    padding: 10px; 
-    margin: 5px 0 10px 0; 
-    background: #222; 
-    border: 1px solid #ffcc00; 
-    color: #fff; 
-    border-radius: 5px; 
-    box-sizing: border-box; 
-    font-family: 'Montserrat', sans-serif; 
-}
+    msg += `\n*💰 TOTAL A PAGAR: R$ ${totalBase.toFixed(2)}*\n`;
+    
+    // Regra do 10º Dia (Se atingiu 10 ou mais)
+    if (dadosFidelidade.contador >= 10) {
+        msg += `\n🎉 *PARABÉNS! ESTE É SEU 10º PEDIDO DE DIAS DIFERENTES!*\n`;
+        msg += `🎁 *Brindes a receber:*\n`;
+        msg += `- Entrega Grátis\n`;
+        msg += `- 1x Rolinho Primavera (Cortesia)\n`;
+        msg += `- 1x Kani de Queijo (Cortesia)\n`;
+        
+        // Zera o contador para o cliente começar um novo ciclo na próxima vez
+        dadosFidelidade.contador = 0;
+        localStorage.setItem('ketsuen_fidelidade', JSON.stringify(dadosFidelidade));
+    } else {
+        msg += `\n🌟 *Fidelidade:* Este é o seu pedido do dia ${dadosFidelidade.contador}/10. (Ao completar 10 você ganha Brindes!)\n`;
+    }
+    
+    msg += `────────────────────`;
 
-#btn-enviar { 
-    width: 100%; 
-    background: #25d366; 
-    color: #fff; 
-    padding: 15px; 
-    border: none; 
-    border-radius: 8px; 
-    font-size: 1.1rem; 
-    font-weight: bold; 
-    cursor: pointer; 
-    margin-top: 10px; 
-}
-
-/* Botão e Modal de Informação (Ingredientes) */
-.info-btn {
-    background: transparent;
-    border: 1px solid #ffcc00;
-    color: #ffcc00;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    margin-left: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: #111;
-    border: 2px solid #e60000;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 350px;
-    text-align: center;
+    // INSIRA SEU NÚMERO DE WHATSAPP AQUI (Somente números com código do país e DDD)
+    const fone = "558183418003"; 
+    window.open(`https://wa.me/${fone}?text=${encodeURIComponent(msg)}`);
 }
