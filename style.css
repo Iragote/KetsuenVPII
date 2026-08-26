@@ -78,13 +78,8 @@ h1 {
     color: #fff; 
 }
 
-.menu-page { 
-    display: none; 
-}
-
-.menu-page.active { 
-    display: block; 
-}
+.menu-page { display: none; }
+.menu-page.active { display: block; }
 
 .item { 
     display: flex; 
@@ -139,12 +134,56 @@ button.add-btn {
     border: 1px solid #ffcc00; 
 }
 
+/* Cartão Fidelidade Estilizado */
+.fidelidade-container {
+    background: #151515;
+    border: 2px dashed #ffcc00;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 30px;
+    text-align: center;
+}
+.fidelidade-container h3 {
+    color: #ffcc00;
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+}
+#fidelidade-texto {
+    font-size: 0.82rem;
+    color: #fff;
+    margin-bottom: 15px;
+}
+.fidelidade-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+.fidelidade-slot {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #222;
+    border: 2px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    opacity: 0.4;
+}
+.fidelidade-slot.preenchido {
+    background: #e60000;
+    border-color: #ffcc00;
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+}
+
 .carrinho-fixo { 
     background: #111; 
     padding: 15px; 
     border: 2px solid #e60000; 
     border-radius: 10px; 
-    margin-top: 30px; 
+    margin-top: 25px; 
 }
 
 .campo-cliente { 
@@ -172,7 +211,7 @@ button.add-btn {
     margin-top: 10px; 
 }
 
-/* Botão e Modal de Informação (Ingredientes) */
+/* Botão e Modal de Ingredientes */
 .info-btn {
     background: transparent;
     border: 1px solid #ffcc00;
