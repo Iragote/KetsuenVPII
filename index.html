@@ -25,9 +25,414 @@
         <button class="tab-btn" onclick="abrirPagina('sunomono', event)">Sunomono</button>
         <button class="tab-btn" onclick="abrirPagina('rolinho primavera', event)">Rolinho Primavera</button>
         <button class="tab-btn" onclick="abrirPagina('yaki', event)">Yakissoba</button>
+        <button class="tab-btn" onclick="abrirPagina('sushiburguer', event)">SushiBurguer</button>
+        <button class="tab-btn" onclick="abrirPagina('sushidog', event)">SushiDog</button>
+        <button class="tab-btn" onclick="abrirPagina('combos', event)">Combos</button>
+        <button class="tab-btn" onclick="abrirPagina('combinados', event)">Combinados</button>
+        <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketsuen VP - Cardápio Completo</title>
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Status da Loja -->
+    <div id="status-loja" class="status-loja fechado">Verificando horário...</div>
+
+    <h1>KETSUEN VP</h1>
+    <div class="subtitle">Comida Japonesa</div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="abrirPagina('natural', event)">Sushi Natural</button>
+        <button class="tab-btn" onclick="abrirPagina('frito', event)">Sushi Frito</button>
+        <button class="tab-btn" onclick="abrirPagina('temaki', event)">Temakis</button>
+        <button class="tab-btn" onclick="abrirPagina('sunomono', event)">Sunomono</button>
+        <button class="tab-btn" onclick="abrirPagina('rolinho primavera', event)">Rolinho Primavera</button>
+        <button class="tab-btn" onclick="abrirPagina('yaki', event)">Yakissoba</button>
         <button class="tab-btn" onclick="abrirPagina('sushi burguer', event)">Sushi Burguer</button>
         <button class="tab-btn" onclick="abrirPagina('sushi hot dog', event)">Sushi Hot Dog</button>
         <button class="tab-btn" onclick="abrirPagina('combos', event)">Combos</button>
+    </div>
+
+    <!-- SUSHIS NATURAIS -->
+    <div id="natural" class="menu-page active">
+        <div class="header-combo">
+            <img src="img/def.jpg" alt="Uramaki">
+            <h3 style="margin: 0;">Uramaki (10 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Uramaki Kani <button class="info-btn" onclick="verIngredientes('Uramaki Kani', 'Arroz, alga, cream cheese e Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 18,00</span><button class="add-btn" onclick="add('Uramaki Kani', 18)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Uramaki Camarão <button class="info-btn" onclick="verIngredientes('Uramaki Camarão', 'Arroz, alga, cream cheese e Camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Uramaki Camarão', 20)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Uramaki Salmão <button class="info-btn" onclick="verIngredientes('Uramaki Salmão', 'Arroz, alga, cream cheese e Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Uramaki Salmão', 20)">+</button></div>
+        </div>
+
+        <div class="header-combo">
+            <img src="img/oipc.webp" alt="Hossomaki">
+            <h3 style="margin: 0;">Hossomaki (10 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Hossomaki Kani <button class="info-btn" onclick="verIngredientes('Hossomaki Kani', 'Arroz, alga e Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 18,00</span><button class="add-btn" onclick="add('Hossomaki Kani', 18)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Hossomaki Camarão <button class="info-btn" onclick="verIngredientes('Hossomaki Camarão', 'Arroz, alga e Camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Hossomaki Camarão', 20)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Hossomaki Salmão <button class="info-btn" onclick="verIngredientes('Hossomaki Salmão', 'Arroz, alga e Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Hossomaki Salmão', 20)">+</button></div>
+        </div>
+
+        <div class="header-combo">
+            <img src="img/d3b1d00360314a60a8a07f9f5d29e94e.jpg" alt="Niguiri">
+            <h3 style="margin: 0;">Niguiri (6 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Niguiri Kani <button class="info-btn" onclick="verIngredientes('Niguiri Kani', 'Bolinho de arroz e fatia de Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 22,00</span><button class="add-btn" onclick="add('Niguiri Kani', 22)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Niguiri Salmão <button class="info-btn" onclick="verIngredientes('Niguiri Salmão', 'Bolinho de arroz e fatia de Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 25,00</span><button class="add-btn" onclick="add('Niguiri Salmão', 25)">+</button></div>
+        </div>
+
+        <!-- ONIGIRI -->
+        <div class="header-combo">
+            <h3 style="margin: 0;">Onigiri</h3>
+        </div>
+        <div class="item">
+            <span>Onigiri Salmão <button class="info-btn" onclick="verIngredientes('Onigiri Salmão', 'Bolinho de arroz recheado com salmão e cream cheese, envolto em alga.')">ℹ️</button></span>
+            <div><span class="preco">R$ 15,00</span><button class="add-btn" onclick="add('Onigiri Salmão', 15)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Onigiri Camarão <button class="info-btn" onclick="verIngredientes('Onigiri Camarão', 'Bolinho de arroz recheado com camarão e cream cheese, envolto em alga.')">ℹ️</button></span>
+            <div><span class="preco">R$ 15,00</span><button class="add-btn" onclick="add('Onigiri Camarão', 15)">+</button></div>
+        </div>
+
+        <!-- SASHIMI -->
+        <div class="header-combo">
+            <h3 style="margin: 0;">Sashimi (10 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Sashimi de Salmão <button class="info-btn" onclick="verIngredientes('Sashimi de Salmão', 'Fatias finas de salmão fresco.')">ℹ️</button></span>
+            <div><span class="preco">R$ 35,00</span><button class="add-btn" onclick="add('Sashimi de Salmão', 35)">+</button></div>
+        </div>
+
+        <div class="header-combo">
+            <img src="img/02Kani.jpg" alt="Kani Queijo">
+            <h3 style="margin: 0;">Kani Queijo (6 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Kani Queijo <button class="info-btn" onclick="verIngredientes('Kani Queijo', 'Kani recheado com cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Kani Queijo', 20)">+</button></div>
+        </div>
+
+        <div class="header-combo">
+            <img src="img/OIP.webp" alt="Joe">
+            <h3 style="margin: 0;">Joe & Ebi Joe (6 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Joe <button class="info-btn" onclick="verIngredientes('Joe', 'Arroz envolto em salmão, cream cheese e tartar.')">ℹ️</button></span>
+            <div><span class="preco">R$ 25,00</span><button class="add-btn" onclick="add('Joe', 25)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Ebi Joe <button class="info-btn" onclick="verIngredientes('Ebi Joe', 'Arroz envolto em salmão, cream cheese e camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 25,00</span><button class="add-btn" onclick="add('Ebi Joe', 25)">+</button></div>
+        </div>
+    </div> 
+
+    <!-- SUSHIS FRITOS -->
+    <div id="frito" class="menu-page">
+        <div class="header-combo">
+            <img src="img/lol.webp" alt="Carioca">
+            <h3 style="margin: 0;">Carioca (10 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Carioca Kani <button class="info-btn" onclick="verIngredientes('Carioca Kani', 'Sushi empanado e frito, arroz, alga e Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 18,00</span><button class="add-btn" onclick="add('Carioca Kani', 18)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Carioca Camarão <button class="info-btn" onclick="verIngredientes('Carioca Camarão', 'Sushi empanado e frito, arroz, alga e Camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Carioca Camarão', 20)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Carioca Salmão <button class="info-btn" onclick="verIngredientes('Carioca Salmão', 'Sushi empanado e frito, arroz, alga e Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Carioca Salmão', 20)">+</button></div>
+        </div>
+
+        <div class="header-combo">
+            <img src="img/cap.jpg" alt="Canapé">
+            <h3 style="margin: 0;">Canapé (10 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Hot Canapé Kani <button class="info-btn" onclick="verIngredientes('Hot Canapé Kani', 'Folha fina e crocante com recheio de arroz, cream cheese e Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 18,00</span><button class="add-btn" onclick="add('Hot Canapé Kani', 18)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Hot Canapé Camarão <button class="info-btn" onclick="verIngredientes('Hot Canapé Camarão', 'Folha fina e crocante com recheio de arroz, cream cheese e Camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Hot Canapé Camarão', 20)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Hot Canapé Salmão <button class="info-btn" onclick="verIngredientes('Hot Canapé Salmão', 'Folha fina e crocante com recheio de arroz, cream cheese e Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Hot Canapé Salmão', 20)">+</button></div>
+        </div>
+
+        <div class="header-combo">
+            <img src="img/Rock.jpg" alt="Hot Roll">
+            <h3 style="margin: 0;">Hot Roll (10 unidades)</h3>
+        </div>
+        <div class="item">
+            <span>Hot Roll Kani <button class="info-btn" onclick="verIngredientes('Hot Roll Kani', 'Sushi frito com arroz, cream cheese e Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 18,00</span><button class="add-btn" onclick="add('Hot Roll Kani', 18)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Hot Roll Camarão <button class="info-btn" onclick="verIngredientes('Hot Roll Camarão', 'Sushi frito com arroz, cream cheese e Camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Hot Roll Camarão', 20)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Hot Roll Salmão <button class="info-btn" onclick="verIngredientes('Hot Roll Salmão', 'Sushi frito com arroz, cream cheese e Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 20,00</span><button class="add-btn" onclick="add('Hot Roll Salmão', 20)">+</button></div>
+        </div>
+    
+        <div class="header-combo">
+            <img src="img/Kanii.jpg" alt="Kani de Queijo Frito">
+            <h3 style="margin: 0;">Kani de Queijo Frito (6 un)</h3>
+        </div>
+        <div class="item">
+            <span>Kani Queijo Frito <button class="info-btn" onclick="verIngredientes('Kani Queijo Frito', 'Kani recheado com queijo, empanado e frito.')">ℹ️</button></span>
+            <div><span class="preco">R$ 25,00</span><button class="add-btn" onclick="add('Kani Queijo Frito', 25)">+</button></div>
+        </div>
+    </div>
+
+    <!-- COMBOS -->
+    <div id="combos" class="menu-page">
+        <div class="header-combo">
+            <img src="img/l.o..jpg" alt="Combo">
+            <h3 style="margin: 0;">Combos Especiais</h3>
+        </div>
+        <div class="item">
+            <span>Combo 10 Pcs +1 Temaki <button class="info-btn" onclick="verIngredientes('Combo 10 Pcs', '10 peças + 1 Temaki Misto.')">ℹ️</button></span>
+            <div><span class="preco">R$ 35,00</span><button class="add-btn" onclick="add('Combo 10 Pcs', 35)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Combo 20 Pcs +1 Temaki <br><small>+1 Kani de Queijo</small> <button class="info-btn" onclick="verIngredientes('Combo 20 Pcs', '20 peças + 1 Temaki + 1 Kani de Queijo.')">ℹ️</button></span>
+            <div><span class="preco">R$ 48,00</span><button class="add-btn" onclick="add('Combo 20 Pcs', 48)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Combo 30 Pcs +1 Temaki <br><small>+2 Kani de Queijo</small> <button class="info-btn" onclick="verIngredientes('Combo 30 Pcs', '30 peças + 1 Temaki + 2 Kanis de Queijo.')">ℹ️</button></span>
+            <div><span class="preco">R$ 70,00</span><button class="add-btn" onclick="add('Combo 30 Pcs', 70)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Combo 40 Pcs +2 Temaki <br><small>+2 Kani de Queijo</small> <button class="info-btn" onclick="verIngredientes('Combo 40 Pcs', '40 peças + 2 Temakis + 2 Kanis de Queijo.')">ℹ️</button></span>
+            <div><span class="preco">R$ 90,00</span><button class="add-btn" onclick="add('Combo 40 Pcs', 90)">+</button></div>
+        </div>
+    </div>
+
+    <!-- TEMAKIS -->
+    <div id="temaki" class="menu-page">
+        <div class="header-combo">
+            <img src="img/tema.webp" alt="Temaki">
+            <h3 style="margin: 0;">Temakis</h3>
+        </div>
+
+        <h4 style="color: #e60000; margin-top: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">Temaki Natural (Cone)</h4>
+        <div class="item">
+            <span>Temaki Salmão <button class="info-btn" onclick="verIngredientes('Temaki Salmão', 'Cone de alga, arroz, salmão fresco e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 27,99</span><button class="add-btn" onclick="add('Temaki Salmão', 27.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Temaki Camarão <button class="info-btn" onclick="verIngredientes('Temaki Camarão', 'Cone de alga, arroz, camarão e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Temaki Camarão', 24.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Temaki Kani <button class="info-btn" onclick="verIngredientes('Temaki Kani', 'Cone de alga, arroz, Kani e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 19,99</span><button class="add-btn" onclick="add('Temaki Kani', 19.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Temaki Misto <button class="info-btn" onclick="verIngredientes('Temaki Misto', 'Cone de alga, arroz, mix de recheios e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 19,99</span><button class="add-btn" onclick="add('Temaki Misto', 19.99)">+</button></div>
+        </div>
+
+        <h4 style="color: #e60000; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">Temaki Frito / Empanado</h4>
+        <div class="item">
+            <span>Temaki Frito Salmão <button class="info-btn" onclick="verIngredientes('Temaki Frito Salmão', 'Cone empanado e frito com recheio de salmão e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 29,99</span><button class="add-btn" onclick="add('Temaki Frito Salmão', 29.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Temaki Frito Camarão <button class="info-btn" onclick="verIngredientes('Temaki Frito Camarão', 'Cone empanado e frito com recheio de camarão e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 27,99</span><button class="add-btn" onclick="add('Temaki Frito Camarão', 27.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Temaki Frito Misto <button class="info-btn" onclick="verIngredientes('Temaki Frito Misto', 'Cone empanado e frito com mix de recheios e cream cheese.')">ℹ️</button></span>
+            <div><span class="preco">R$ 22,99</span><button class="add-btn" onclick="add('Temaki Frito Misto', 22.99)">+</button></div>
+        </div>
+
+        <div class="item" style="margin-top: 15px; background: #1a1a1a; padding: 10px; border-radius: 5px; border-left: 3px solid #e60000;">
+            <span>Mini Temaki Frito (5 unidades) <button class="info-btn" onclick="verIngredientes('Mini Temaki Frito', 'Kit com 5 mini temakis empanados e fritos.')">ℹ️</button></span>
+            <div><span class="preco">R$ 50,00</span><button class="add-btn" onclick="add('Mini Temaki Frito (5 un)', 50)">+</button></div>
+        </div>
+    </div>
+
+    <!-- ROLINHO PRIMAVERA -->
+    <div id="rolinho primavera" class="menu-page">
+        <div class="header-combo">
+            <h3 style="margin: 0;">Rolinho Primavera</h3>
+        </div>
+        
+        <h4 style="color: #e60000; margin-top: 15px; border-bottom: 1px solid #333; padding-bottom: 5px;">Tradicional</h4>
+        <div class="item">
+            <span>Rolinho Primavera Queijo (Unidade) <button class="info-btn" onclick="verIngredientes('Rolinho Queijo', 'Massa crocante recheada com queijo derretido.')">ℹ️</button></span>
+            <div><span class="preco">R$ 8,00</span><button class="add-btn" onclick="add('Rolinho Primavera Queijo', 8)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Rolinho Primavera Carne com Queijo (Unidade) <button class="info-btn" onclick="verIngredientes('Rolinho Carne com Queijo', 'Massa crocante recheada com carne moída temperada e queijo.')">ℹ️</button></span>
+            <div><span class="preco">R$ 9,00</span><button class="add-btn" onclick="add('Rolinho Primavera Carne com Queijo', 9)">+</button></div>
+        </div>
+
+        <h4 style="color: #e60000; margin-top: 20px; border-bottom: 1px solid #333; padding-bottom: 5px;">Romeu e Julieta (Doce)</h4>
+        <div class="item">
+            <span>Rolinho Romeu e Julieta (Unidade) <button class="info-btn" onclick="verIngredientes('Rolinho Romeu e Julieta', 'Massa crocante recheada com goiabada e cream cheese / queijo.')">ℹ️</button></span>
+            <div><span class="preco">R$ 8,50</span><button class="add-btn" onclick="add('Rolinho Romeu e Julieta', 8.50)">+</button></div>
+        </div>
+    </div>
+
+    <!-- YAKISSOBA -->
+    <div id="yaki" class="menu-page">
+        <div class="header-combo">
+            <img src="img/yaki.jpg" alt="Yakissoba">
+            <h3 style="margin: 0;">Yakissoba</h3>
+        </div>
+        <div class="item">
+            <span>Yakissoba P <button class="info-btn" onclick="verIngredientes('Yakissoba', 'Macarrão oriental, legumes, carnes e molho shoyu.')">ℹ️</button></span>
+            <div><span class="preco">R$ 14,99</span><button class="add-btn" onclick="add('Yakissoba P', 14.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Yakissoba M <button class="info-btn" onclick="verIngredientes('Yakissoba', 'Macarrão oriental, legumes, carnes e molho shoyu.')">ℹ️</button></span>
+            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Yakissoba M', 24.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Yakissoba G <button class="info-btn" onclick="verIngredientes('Yakissoba', 'Macarrão oriental, legumes, carnes e molho shoyu.')">ℹ️</button></span>
+            <div><span class="preco">R$ 34,99</span><button class="add-btn" onclick="add('Yakissoba G', 34.99)">+</button></div>
+        </div>
+    </div>
+
+    <!-- SUSHI BURGUER -->
+    <div id="sushi burguer" class="menu-page">
+        <div class="header-combo">
+            <h3 style="margin: 0;">Sushi Burguer</h3>
+        </div>
+        <div class="item">
+            <span>Sushi Burguer Kani <button class="info-btn" onclick="verIngredientes('Sushi Burguer Kani', 'Hambúrguer feito com base de arroz empanado e frito, recheado com cream cheese e Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Sushi Burguer Kani', 24.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sushi Burguer Camarão <button class="info-btn" onclick="verIngredientes('Sushi Burguer Camarão', 'Hambúrguer feito com base de arroz empanado e frito, recheado com cream cheese e Camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 27,99</span><button class="add-btn" onclick="add('Sushi Burguer Camarão', 27.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sushi Burguer Salmão <button class="info-btn" onclick="verIngredientes('Sushi Burguer Salmão', 'Hambúrguer feito com base de arroz empanado e frito, recheado com cream cheese e Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 29,99</span><button class="add-btn" onclick="add('Sushi Burguer Salmão', 29.99)">+</button></div>
+        </div>
+    </div>
+
+    <!-- SUSHI HOT DOG -->
+    <div id="sushi hot dog" class="menu-page">
+        <div class="header-combo">
+            <h3 style="margin: 0;">Sushi Hot Dog</h3>
+        </div>
+        <div class="item">
+            <span>Sushi Hot Dog Kani <button class="info-btn" onclick="verIngredientes('Sushi Hot Dog Kani', 'Formato especial de hot dog empanado e frito, com recheio de arroz, cream cheese e Kani.')">ℹ️</button></span>
+            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Sushi Hot Dog Kani', 24.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sushi Hot Dog Camarão <button class="info-btn" onclick="verIngredientes('Sushi Hot Dog Camarão', 'Formato especial de hot dog empanado e frito, com recheio de arroz, cream cheese e Camarão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 27,99</span><button class="add-btn" onclick="add('Sushi Hot Dog Camarão', 27.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sushi Hot Dog Salmão <button class="info-btn" onclick="verIngredientes('Sushi Hot Dog Salmão', 'Formato especial de hot dog empanado e frito, com recheio de arroz, cream cheese e Salmão.')">ℹ️</button></span>
+            <div><span class="preco">R$ 29,99</span><button class="add-btn" onclick="add('Sushi Hot Dog Salmão', 29.99)">+</button></div>
+        </div>
+    </div>
+    
+    <!-- SUNOMONO -->
+    <div id="sunomono" class="menu-page">
+        <div class="header-combo">
+            <img src="img/yaki.jpg" alt="Sunomono">
+            <h3 style="margin: 0;">Sunomono</h3>
+        </div>
+        <div class="item">
+            <span>Sunomono P <button class="info-btn" onclick="verIngredientes('Sunomono', 'Conservas de pepino japonês com gergelim.')">ℹ️</button></span>
+            <div><span class="preco">R$ 14,99</span><button class="add-btn" onclick="add('Sunomono P', 14.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sunomono M <button class="info-btn" onclick="verIngredientes('Sunomono', 'Conservas de pepino japonês com fatias de kani e gergelim.')">ℹ️</button></span>
+            <div><span class="preco">R$ 24,99</span><button class="add-btn" onclick="add('Sunomono M', 24.99)">+</button></div>
+        </div>
+        <div class="item">
+            <span>Sunomono G <button class="info-btn" onclick="verIngredientes('Sunomono', 'Conservas de pepino japonês com fatias de kani, salmão, gergelim e molho agridoce.')">ℹ️</button></span>
+            <div><span class="preco">R$ 34,99</span><button class="add-btn" onclick="add('Sunomono G', 34.99)">+</button></div>
+        </div>
+    </div>
+    
+    <!-- CARTÃO FIDELIDADE (MINI-JOGO) -->
+    <div class="fidelidade-container">
+        <h3>Seu Cartão Fidelidade 🍣</h3>
+        <p id="fidelidade-texto">Complete 10 pedidos em dias diferentes para ganhar brindes!</p>
+        <div class="fidelidade-grid" id="fidelidade-grid"></div>
+    </div>
+
+    <!-- CARRINHO -->
+    <div class="carrinho-fixo">
+        <h3 style="color:#e60000; margin: 0 0 10px 0;">Meu Pedido</h3>
+        <div id="lista-carrinho" style="font-size: 0.85rem; margin-bottom: 10px; color: #fff;">Carrinho vazio</div>
+        <p><strong>Total: R$ <span id="total-val">0,00</span></strong></p>
+        
+        <label>Dados para Entrega</label>
+        <input type="text" id="nome-cli" class="campo-cliente" placeholder="Seu Nome">
+        <input type="text" id="end-cli" class="campo-cliente" placeholder="Endereço (Rua, nº, Bairro)">
+        <input type="tel" id="tel-cli" class="campo-cliente" placeholder="Seu Telefone (DDD)">
+        
+        <label>Forma de Pagamento</label>
+        <select id="pagamento" class="campo-cliente" onchange="gerenciarCamposExtras()">
+            <option value="Pix">Pix</option>
+            <option value="Dinheiro">Dinheiro (Espécie)</option>
+        </select>
+
+        <div id="div-troco" style="display: none;">
+            <input type="text" id="troco-cli" class="campo-cliente" placeholder="Troco para quanto?">
+        </div>
+
+        <button id="btn-enviar" onclick="enviar()">Pedir no WhatsApp 📲</button>
+    </div>
+</div>
+
+<!-- MODAL DE INGREDIENTES -->
+<div id="modal-ingredientes" class="modal-overlay" onclick="fecharModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h3 id="modal-titulo" style="color: #e60000; margin-top:0;">Ingredientes</h3>
+        <p id="modal-texto" style="color: #fff; font-size: 0.95rem; line-height: 1.5;"></p>
+        <button onclick="fecharModal()" class="add-btn" style="width:100%; margin-top:10px; font-size: 1rem; padding: 10px;">Fechar</button>
+    </div>
+</div>
+
+<!-- JS Externo -->
+<script src="script.js"></script>
+</body>
+</html>
     </div>
 
     <!-- SUSHIS NATURAIS -->
